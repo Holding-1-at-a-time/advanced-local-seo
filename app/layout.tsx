@@ -3,7 +3,8 @@ import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-import { BUSINESS_INFO } from "@/lib/constants"
+import { BUSINESS_INFO, RATING_DATA } from "@/lib/constants"
+import { ConvexClientProvider } from "@/lib/convex-provider"
 
 const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" })
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
@@ -67,8 +68,6 @@ export const viewport: Viewport = {
   maximumScale: 5,
 }
 
-import { RATING_DATA } from "@/lib/constants"
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -84,7 +83,7 @@ export default function RootLayout({
         <meta name="ICBM" content={`${BUSINESS_INFO.coordinates.lat}, ${BUSINESS_INFO.coordinates.lng}`} />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
-        {children}
+        <ConvexClientProvider>{children}</ConvexClientProvider>
         <Analytics />
       </body>
     </html>

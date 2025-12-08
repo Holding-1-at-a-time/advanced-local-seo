@@ -3,6 +3,8 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useMutation } from "convex/react"
+import { api } from "@/convex/_generated/api"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -32,29 +34,36 @@ export function LeadForm({
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  const createLead = useMutation(api.leads.createLead)
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
     setError(null)
 
     const formData = new FormData(e.currentTarget)
-    const data = {
+    const leadData = {
       customerName: formData.get("name") as string,
       customerEmail: formData.get("email") as string,
       customerPhone: formData.get("phone") as string,
-      vehicleType: formData.get("vehicleType") as string,
-      service: (formData.get("service") as string) || serviceSlug,
-      neighborhood: (formData.get("neighborhood") as string) || neighborhood,
-      message: formData.get("message") as string,
+      serviceSlug: (formData.get("service") as string) || serviceSlug || undefined,
+      message: (formData.get("message") as string) || undefined,
       source,
     }
 
-    // Simulate form submission - replace with actual API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      console.log("[v0] Lead form submitted:", data)
+      const leadId = await createLead(leadData)
+      console.log("[v0] Lead created in Convex:", leadId)
+
+      await fetch("/api/lead/process", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...leadData, leadId }),
+      })
+
       setIsSuccess(true)
-    } catch {
+    } catch (err) {
+      console.error("[v0] Lead submission error:", err)
       setError("Something went wrong. Please try again or call us directly.")
     } finally {
       setIsSubmitting(false)
