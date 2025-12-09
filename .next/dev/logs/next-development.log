@@ -1,0 +1,194 @@
+[00:00:01.912] Server  WARN     ⚠ Minimum recommended TypeScript version is v5.1.0, older versions can potentially be incompatible with Next.js. Detected: 5.0.2
+[00:00:01.922] Server  LOG     
+[00:00:01.923] Server  LOG        We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+[00:00:01.923] Server  LOG        The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+[00:00:01.923] Server  LOG        	- include was updated to add '.next/dev/types/**/*.ts'
+[00:00:01.924] Server  LOG     
+[00:00:01.924] Server  LOG        The following mandatory changes were made to your tsconfig.json:
+
+[00:00:01.924] Server  LOG        	- jsx was set to react-jsx (next.js uses the React automatic runtime)
+[00:00:01.925] Server  LOG     
+[00:00:02.186] Server  LOG      ✓ Ready in 1825ms
+[00:00:22.204] Server  LOG      ○ Compiling / ...
+[00:00:28.896] Server  ERROR    ⨯ ./components/lead-form.tsx:7:1
+Export api doesn't exist in target module
+   5 | import { useState } from "react"
+   6 | import { useMutation } from "convex/react"
+>  7 | import { api } from "@/convex/_generated/api"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Button } from "@/components/ui/button"
+   9 | import { Input } from "@/components/ui/input"
+  10 | import { Label } from "@/components/ui/label"
+
+The export api was not found in module [project]/convex/_generated/api.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/lead-form.tsx
+    ./app/(marketing)/page.tsx
+
+
+
+./components/lead-form.tsx:7:1
+Export api doesn't exist in target module
+   5 | import { useState } from "react"
+   6 | import { useMutation } from "convex/react"
+>  7 | import { api } from "@/convex/_generated/api"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Button } from "@/components/ui/button"
+   9 | import { Input } from "@/components/ui/input"
+  10 | import { Label } from "@/components/ui/label"
+
+The export api was not found in module [project]/convex/_generated/api.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/lead-form.tsx
+    ./app/(marketing)/page.tsx
+
+
+[00:00:37.365] Browser ERROR   uncaughtError: Error: ./components/lead-form.tsx:7:1
+Export api doesn't exist in target module
+   5 | import { useState } from "react"
+   6 | import { useMutation } from "convex/react"
+>  7 | import { api } from "@/convex/_generated/api"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Button } from "@/components/ui/button"
+   9 | import { Input } from "@/components/ui/input"
+  10 | import { Label } from "@/components/ui/label"
+
+The export api was not found in module [project]/convex/_generated/api.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/lead-form.tsx
+    ./app/(marketing)/page.tsx
+
+
+[00:00:38.040] Browser ERROR   ./components/lead-form.tsx:7:1
+Export api doesn't exist in target module
+   5 | import { useState } from "react"
+   6 | import { useMutation } from "convex/react"
+>  7 | import { api } from "@/convex/_generated/api"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Button } from "@/components/ui/button"
+   9 | import { Input } from "@/components/ui/input"
+  10 | import { Label } from "@/components/ui/label"
+
+The export api was not found in module [project]/convex/_generated/api.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/lead-form.tsx
+    ./app/(marketing)/page.tsx
+[00:00:38.040] Browser ERROR   ./components/lead-form.tsx:7:1
+Export api doesn't exist in target module
+   5 | import { useState } from "react"
+   6 | import { useMutation } from "convex/react"
+>  7 | import { api } from "@/convex/_generated/api"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Button } from "@/components/ui/button"
+   9 | import { Input } from "@/components/ui/input"
+  10 | import { Label } from "@/components/ui/label"
+
+The export api was not found in module [project]/convex/_generated/api.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/lead-form.tsx
+    ./app/(marketing)/page.tsx
+[00:00:38.040] Browser ERROR   ./components/lead-form.tsx:7:1
+Export api doesn't exist in target module
+   5 | import { useState } from "react"
+   6 | import { useMutation } from "convex/react"
+>  7 | import { api } from "@/convex/_generated/api"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Button } from "@/components/ui/button"
+   9 | import { Input } from "@/components/ui/input"
+  10 | import { Label } from "@/components/ui/label"
+
+The export api was not found in module [project]/convex/_generated/api.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/lead-form.tsx
+    ./app/(marketing)/page.tsx
+[00:00:38.040] Browser ERROR   ./components/lead-form.tsx:7:1
+Export api doesn't exist in target module
+   5 | import { useState } from "react"
+   6 | import { useMutation } from "convex/react"
+>  7 | import { api } from "@/convex/_generated/api"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Button } from "@/components/ui/button"
+   9 | import { Input } from "@/components/ui/input"
+  10 | import { Label } from "@/components/ui/label"
+
+The export api was not found in module [project]/convex/_generated/api.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/lead-form.tsx
+    ./app/(marketing)/page.tsx
+[00:01:05.016] Browser ERROR   ./components/lead-form.tsx:7:1
+Export api doesn't exist in target module
+   5 | import { useState } from "react"
+   6 | import { useMutation } from "convex/react"
+>  7 | import { api } from "@/convex/_generated/api"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Button } from "@/components/ui/button"
+   9 | import { Input } from "@/components/ui/input"
+  10 | import { Label } from "@/components/ui/label"
+
+The export api was not found in module [project]/convex/_generated/api.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/lead-form.tsx
+    ./app/(marketing)/page.tsx
+[00:01:05.016] Browser ERROR   ./components/lead-form.tsx:7:1
+Export api doesn't exist in target module
+   5 | import { useState } from "react"
+   6 | import { useMutation } from "convex/react"
+>  7 | import { api } from "@/convex/_generated/api"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Button } from "@/components/ui/button"
+   9 | import { Input } from "@/components/ui/input"
+  10 | import { Label } from "@/components/ui/label"
+
+The export api was not found in module [project]/convex/_generated/api.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/lead-form.tsx
+    ./app/(marketing)/page.tsx
+[00:05:51.288] Server  LOG      ✓ Compiled in 743ms
+[00:05:51.455] Server  LOG        Reload env: .env.local
+[00:06:03.143] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:04.021] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:06:04.021] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:06:04.021] Browser LOG     %c[Vercel Web Analytics]%c [pageview] https://crispy-disco-xj679g74jw525v6-3000.app.github.dev/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"https://crispy-disco-xj679g74jw525v6-3000.app.github.dev/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765266932245}
+[00:07:33.382] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:33.382] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:07:33.382] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:07:33.382] Browser LOG     %c[Vercel Web Analytics]%c [pageview] https://crispy-disco-xj679g74jw525v6-3000.app.github.dev/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"https://crispy-disco-xj679g74jw525v6-3000.app.github.dev/","r":"https://crispy-disco-xj679g74jw525v6.github.dev/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765267021863}
+[00:07:48.777] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:07:48.777] Browser LOG     %c[Vercel Web Analytics]%c [pageview] https://crispy-disco-xj679g74jw525v6-3000.app.github.dev/services color: rgb(120, 120, 120) color: inherit {"dp":"/services","o":"https://crispy-disco-xj679g74jw525v6-3000.app.github.dev/services","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765267037493}
