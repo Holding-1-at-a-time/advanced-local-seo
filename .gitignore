@@ -1,0 +1,14 @@
+#Ignore vscode AI rules
+.github/instructions/codacy.instructions.md
+
+.early.coverage
+.env.local
+.node_modules
+.env
+.vscode
+.vscodeignore
+.vscode/extensions.json
+.vscode/launch.json
+.vscode/settings.json
+
+.next
