@@ -18,28 +18,24 @@ export function StickyCTA() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  if (!isVisible) return null
+
   return (
-    <div
-      className={`fixed bottom-0 left-0 right-0 z-40 transition-all duration-500 md:hidden ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-      }`}
-    >
-      <div className="border-t border-border/50 bg-background/80 backdrop-blur-xl px-4 py-3">
-        <div className="flex items-center gap-3">
-          <a
-            href={`tel:${BUSINESS_INFO.phoneRaw}`}
-            className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-border bg-secondary/50 px-4 py-3.5 font-medium text-foreground transition-all hover:bg-secondary active:scale-95"
-          >
-            <Phone className="h-5 w-5 text-primary" />
-            Call Now
-          </a>
-          <Button asChild className="flex-1 h-[50px] rounded-xl shadow-md hover:shadow-lg transition-all" size="lg">
-            <Link href="/booking" className="flex items-center justify-center gap-2">
-              <Calendar className="h-5 w-5" />
-              Book Online
-            </Link>
-          </Button>
-        </div>
+    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 md:hidden">
+      <div className="flex items-center justify-between gap-2 p-3">
+        <a
+          href={`tel:${BUSINESS_INFO.phoneRaw}`}
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-border bg-secondary px-4 py-3 font-medium text-foreground transition-colors hover:bg-secondary/80"
+        >
+          <Phone className="h-5 w-5" />
+          Call Now
+        </a>
+        <Button asChild className="flex-1 py-6" size="lg">
+          <Link href="/booking" className="flex items-center justify-center gap-2">
+            <Calendar className="h-5 w-5" />
+            Book Online
+          </Link>
+        </Button>
       </div>
     </div>
   )

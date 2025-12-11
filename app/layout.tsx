@@ -1,28 +1,12 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google"
+import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-import { BUSINESS_INFO, RATING_DATA } from "@/lib/constants"
-import { ConvexClientProvider } from "@/lib/convex-provider"
+import { BUSINESS_INFO } from "@/lib/constants"
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-})
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains",
-  display: "swap",
-})
+const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" })
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
 
 export const metadata: Metadata = {
   metadataBase: new URL(BUSINESS_INFO.website),
@@ -83,13 +67,15 @@ export const viewport: Viewport = {
   maximumScale: 5,
 }
 
+import { RATING_DATA } from "@/lib/constants"
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="light" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="geo.region" content="US-TX" />
@@ -97,8 +83,8 @@ export default function RootLayout({
         <meta name="geo.position" content={`${BUSINESS_INFO.coordinates.lat};${BUSINESS_INFO.coordinates.lng}`} />
         <meta name="ICBM" content={`${BUSINESS_INFO.coordinates.lat}, ${BUSINESS_INFO.coordinates.lng}`} />
       </head>
-      <body className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        <ConvexClientProvider>{children}</ConvexClientProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+        {children}
         <Analytics />
       </body>
     </html>

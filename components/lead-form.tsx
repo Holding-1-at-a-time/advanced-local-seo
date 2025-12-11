@@ -3,15 +3,13 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useMutation } from "convex/react"
-import { api } from "@/convex/_generated/api"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { SERVICES, VEHICLE_TYPES, SERVICE_AREAS, BUSINESS_INFO } from "@/lib/constants"
-import { CheckCircle, Loader2, Sparkles } from "lucide-react"
+import { CheckCircle, Loader2 } from "lucide-react"
 
 interface LeadFormProps {
   serviceName?: string
@@ -34,36 +32,29 @@ export function LeadForm({
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const createLead = useMutation(api.leads.createLead)
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
     setError(null)
 
     const formData = new FormData(e.currentTarget)
-    const leadData = {
+    const data = {
       customerName: formData.get("name") as string,
       customerEmail: formData.get("email") as string,
       customerPhone: formData.get("phone") as string,
-      serviceSlug: (formData.get("service") as string) || serviceSlug || undefined,
-      message: (formData.get("message") as string) || undefined,
+      vehicleType: formData.get("vehicleType") as string,
+      service: (formData.get("service") as string) || serviceSlug,
+      neighborhood: (formData.get("neighborhood") as string) || neighborhood,
+      message: formData.get("message") as string,
       source,
     }
 
+    // Simulate form submission - replace with actual API call
     try {
-      const leadId = await createLead(leadData)
-      console.log("[v0] Lead created in Convex:", leadId)
-
-      await fetch("/api/lead/process", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...leadData, leadId }),
-      })
-
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      console.log("[v0] Lead form submitted:", data)
       setIsSuccess(true)
-    } catch (err) {
-      console.error("[v0] Lead submission error:", err)
+    } catch {
       setError("Something went wrong. Please try again or call us directly.")
     } finally {
       setIsSubmitting(false)
@@ -72,19 +63,15 @@ export function LeadForm({
 
   if (isSuccess) {
     return (
-      <div
-        className={`animate-fade-in-scale rounded-2xl border border-primary/30 bg-primary/5 p-8 text-center ${className}`}
-      >
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-          <CheckCircle className="h-8 w-8 text-primary" />
-        </div>
+      <div className={`rounded-xl border border-primary/30 bg-primary/10 p-8 text-center ${className}`}>
+        <CheckCircle className="mx-auto mb-4 h-12 w-12 text-primary" />
         <h3 className="mb-2 text-xl font-semibold text-foreground">Thank You!</h3>
         <p className="text-muted-foreground">
           We've received your request and will contact you within 2 hours during business hours.
         </p>
         <p className="mt-4 text-sm text-muted-foreground">
           Need immediate assistance? Call us at{" "}
-          <a href={`tel:${BUSINESS_INFO.phoneRaw}`} className="text-primary font-medium hover:underline">
+          <a href={`tel:${BUSINESS_INFO.phoneRaw}`} className="text-primary hover:underline">
             {BUSINESS_INFO.phone}
           </a>
         </p>
@@ -95,66 +82,45 @@ export function LeadForm({
   const isCompact = variant === "compact" || variant === "inline"
 
   return (
-    <form onSubmit={handleSubmit} className={`space-y-5 ${className}`}>
+    <form onSubmit={handleSubmit} className={`space-y-4 ${className}`}>
       {error && (
-        <div className="animate-fade-in rounded-xl border border-destructive/30 bg-destructive/5 p-4 text-sm text-destructive">
+        <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-3 text-sm text-destructive">
           {error}
         </div>
       )}
 
-      <div className={isCompact ? "grid gap-4 sm:grid-cols-2" : "space-y-5"}>
+      <div className={isCompact ? "grid gap-4 sm:grid-cols-2" : "space-y-4"}>
         <div className="space-y-2">
-          <Label htmlFor="name" className="text-sm font-medium">
-            Full Name
-          </Label>
-          <Input
-            id="name"
-            name="name"
-            placeholder="John Smith"
-            required
-            className="h-12 rounded-xl bg-secondary/50 border-border/50 focus:bg-background transition-colors"
-          />
+          <Label htmlFor="name">Full Name *</Label>
+          <Input id="name" name="name" placeholder="John Smith" required className="bg-background" />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email" className="text-sm font-medium">
-            Email
-          </Label>
+          <Label htmlFor="email">Email *</Label>
           <Input
             id="email"
             name="email"
             type="email"
             placeholder="john@example.com"
             required
-            className="h-12 rounded-xl bg-secondary/50 border-border/50 focus:bg-background transition-colors"
+            className="bg-background"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="phone" className="text-sm font-medium">
-            Phone Number
-          </Label>
-          <Input
-            id="phone"
-            name="phone"
-            type="tel"
-            placeholder="(555) 123-4567"
-            required
-            className="h-12 rounded-xl bg-secondary/50 border-border/50 focus:bg-background transition-colors"
-          />
+          <Label htmlFor="phone">Phone Number *</Label>
+          <Input id="phone" name="phone" type="tel" placeholder="(555) 123-4567" required className="bg-background" />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="vehicleType" className="text-sm font-medium">
-            Vehicle Type
-          </Label>
+          <Label htmlFor="vehicleType">Vehicle Type</Label>
           <Select name="vehicleType">
-            <SelectTrigger className="h-12 rounded-xl bg-secondary/50 border-border/50 focus:bg-background transition-colors">
+            <SelectTrigger className="bg-background">
               <SelectValue placeholder="Select vehicle type" />
             </SelectTrigger>
-            <SelectContent className="rounded-xl">
+            <SelectContent>
               {VEHICLE_TYPES.map((type) => (
-                <SelectItem key={type} value={type} className="rounded-lg">
+                <SelectItem key={type} value={type}>
                   {type}
                 </SelectItem>
               ))}
@@ -164,16 +130,14 @@ export function LeadForm({
 
         {!serviceSlug && (
           <div className="space-y-2">
-            <Label htmlFor="service" className="text-sm font-medium">
-              Service Needed
-            </Label>
+            <Label htmlFor="service">Service Needed</Label>
             <Select name="service">
-              <SelectTrigger className="h-12 rounded-xl bg-secondary/50 border-border/50 focus:bg-background transition-colors">
+              <SelectTrigger className="bg-background">
                 <SelectValue placeholder="Select a service" />
               </SelectTrigger>
-              <SelectContent className="rounded-xl">
+              <SelectContent>
                 {SERVICES.map((service) => (
-                  <SelectItem key={service.slug} value={service.slug} className="rounded-lg">
+                  <SelectItem key={service.slug} value={service.slug}>
                     {service.name}
                   </SelectItem>
                 ))}
@@ -184,16 +148,14 @@ export function LeadForm({
 
         {!neighborhood && (
           <div className="space-y-2">
-            <Label htmlFor="neighborhood" className="text-sm font-medium">
-              Your Area
-            </Label>
+            <Label htmlFor="neighborhood">Your Area</Label>
             <Select name="neighborhood">
-              <SelectTrigger className="h-12 rounded-xl bg-secondary/50 border-border/50 focus:bg-background transition-colors">
+              <SelectTrigger className="bg-background">
                 <SelectValue placeholder="Select your area" />
               </SelectTrigger>
-              <SelectContent className="rounded-xl max-h-60">
+              <SelectContent>
                 {SERVICE_AREAS.map((area) => (
-                  <SelectItem key={area.slug} value={area.slug} className="rounded-lg">
+                  <SelectItem key={area.slug} value={area.slug}>
                     {area.name}
                   </SelectItem>
                 ))}
@@ -205,34 +167,30 @@ export function LeadForm({
 
       {variant === "default" && (
         <div className="space-y-2">
-          <Label htmlFor="message" className="text-sm font-medium">
-            Additional Details
-          </Label>
+          <Label htmlFor="message">Additional Details</Label>
           <Textarea
             id="message"
             name="message"
             placeholder="Tell us about your vehicle and any specific concerns..."
             rows={3}
-            className="rounded-xl bg-secondary/50 border-border/50 focus:bg-background transition-colors resize-none"
+            className="bg-background resize-none"
           />
         </div>
       )}
 
       <Button
         type="submit"
-        className="w-full h-14 rounded-xl text-base font-medium shadow-md hover:shadow-lg transition-all"
+        className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+        size="lg"
         disabled={isSubmitting}
       >
         {isSubmitting ? (
           <>
-            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             Submitting...
           </>
         ) : (
-          <>
-            <Sparkles className="mr-2 h-5 w-5" />
-            Get My Free Quote
-          </>
+          "Get My Free Quote"
         )}
       </Button>
 

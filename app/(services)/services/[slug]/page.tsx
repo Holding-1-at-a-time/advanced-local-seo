@@ -21,7 +21,6 @@ import { LeadForm } from "@/components/lead-form"
 import { TrustBadges } from "@/components/trust-badges"
 import { ServiceSchema, BreadcrumbSchema, FAQSchema } from "@/components/json-ld-schema"
 import { SERVICES, BUSINESS_INFO, SERVICE_AREAS, RATING_DATA } from "@/lib/constants"
-import { getServiceImage } from "@/lib/images"
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -260,7 +259,7 @@ const defaultContent = {
   clusterPages: [],
 }
 
-export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ServicePage({ params }: PageProps) {
   const { slug } = await params
   const service = SERVICES.find((s) => s.slug === slug)
 
@@ -278,8 +277,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     { name: "Services", href: "/services" },
     { name: `${service.name} San Antonio`, href: `/services/${slug}` },
   ]
-
-  const serviceImage = getServiceImage(slug)
 
   return (
     <>
@@ -311,7 +308,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
           <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
             {/* Content */}
-            <div className="lg:order-1">
+            <div>
               <Link
                 href="/services"
                 className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary"
@@ -355,10 +352,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </div>
 
             {/* Image */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-secondary lg:order-2">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-secondary">
               <Image
-                src={serviceImage.src || "/placeholder.svg"}
-                alt={serviceImage.alt}
+                src={`/.jpg?height=600&width=800&query=${encodeURIComponent(service.name + " professional auto detailing san antonio texas")}`}
+                alt={`${service.name} service in San Antonio, TX - ${BUSINESS_INFO.name}`}
                 fill
                 className="object-cover"
                 priority

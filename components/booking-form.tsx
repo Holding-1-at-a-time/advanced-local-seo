@@ -3,8 +3,6 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useMutation } from "convex/react"
-import { api } from "@/convex/_generated/api"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -18,46 +16,33 @@ export function BookingForm() {
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const createBooking = useMutation(api.bookings.createBooking)
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
     setError(null)
 
     const formData = new FormData(e.currentTarget)
-    const bookingData = {
+    const data = {
       customerName: formData.get("name") as string,
       customerEmail: formData.get("email") as string,
       customerPhone: formData.get("phone") as string,
       vehicleType: formData.get("vehicleType") as string,
-      vehicleMake: (formData.get("vehicleMake") as string) || undefined,
-      vehicleYear: (formData.get("vehicleYear") as string) || undefined,
-      serviceSlug: formData.get("service") as string,
+      vehicleMake: formData.get("vehicleMake") as string,
+      vehicleYear: formData.get("vehicleYear") as string,
+      service: formData.get("service") as string,
       neighborhood: formData.get("neighborhood") as string,
-      scheduledDate: formData.get("preferredDate") as string,
-      scheduledTime: formData.get("preferredTime") as string,
-      specialRequests: (formData.get("message") as string) || undefined,
+      preferredDate: formData.get("preferredDate") as string,
+      preferredTime: formData.get("preferredTime") as string,
+      message: formData.get("message") as string,
       source: "booking_page",
     }
 
+    // Simulate form submission - replace with actual API call
     try {
-      const bookingId = await createBooking(bookingData)
-      console.log("[v0] Booking created in Convex:", bookingId)
-
-      const emailResponse = await fetch("/api/booking/process", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...bookingData, bookingId }),
-      })
-
-      if (!emailResponse.ok) {
-        console.warn("[v0] Email/calendar processing failed, but booking was saved")
-      }
-
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+      console.log("[v0] Booking form submitted:", data)
       setIsSuccess(true)
-    } catch (err) {
-      console.error("[v0] Booking submission error:", err)
+    } catch {
       setError("Something went wrong. Please try again or call us directly.")
     } finally {
       setIsSubmitting(false)
@@ -73,7 +58,6 @@ export function BookingForm() {
           Thank you for your booking request. We'll contact you within 2 hours during business hours to confirm your
           appointment and collect the deposit.
         </p>
-        <p className="mb-2 text-sm text-muted-foreground">A confirmation email has been sent to your inbox.</p>
         <p className="text-sm text-muted-foreground">
           Need immediate assistance? Call us at{" "}
           <a href={`tel:${BUSINESS_INFO.phoneRaw}`} className="font-semibold text-primary hover:underline">
