@@ -1,5 +1,5 @@
 import { v } from "convex/values"
-import { mutation, query } from "./_generated/server"
+import { mutation, query } from "./_generated/server.d"
 
 // Create a new lead
 export const createLead = mutation({
