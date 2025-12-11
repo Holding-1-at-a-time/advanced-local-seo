@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/rrome/advanced-local-seo/lib/convex-provider.tsx"],"sourcesContent":["\"use client\"\r\n\r\nimport { ConvexProvider, ConvexReactClient } from \"convex/react\"\r\nimport type { ReactNode } from \"react\"\r\n\r\nconst convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!)\r\n\r\nexport function ConvexClientProvider({ children }: { children: ReactNode }) {\r\n  return <ConvexProvider client={convex}>{children}</ConvexProvider>\r\n}\r\n"],"names":[],"mappings":";;;;;AAEA;AAAA;AAFA;;;AAKA,MAAM,SAAS,IAAI,yRAAiB;AAE7B,SAAS,qBAAqB,EAAE,QAAQ,EAA2B;IACxE,qBAAO,6WAAC,sRAAc;QAAC,QAAQ;kBAAS;;;;;;AAC1C"}}]
-}
