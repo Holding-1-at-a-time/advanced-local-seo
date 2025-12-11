@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { TrustBadges } from "@/components/trust-badges"
 import { BreadcrumbSchema } from "@/components/json-ld-schema"
 import { SERVICES, BUSINESS_INFO, SERVICE_AREAS } from "@/lib/constants"
+import { getServiceImage } from "@/lib/images"
 
 export const metadata: Metadata = {
   title: "Auto Detailing Services San Antonio | One Detail At A Time",
@@ -85,49 +86,52 @@ export default function ServicesPage() {
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((service) => (
-              <Card
-                key={service.slug}
-                className="group overflow-hidden border-border bg-card transition-all hover:border-primary/50 hover:shadow-lg"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
-                  <Image
-                    src={`/.jpg?height=300&width=480&query=${encodeURIComponent(service.name + " auto detailing san antonio")}`}
-                    alt={`${service.name} service in San Antonio, TX`}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                    <span className="rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground">
-                      {service.priceRange}
-                    </span>
-                    {service.featured && (
-                      <span className="rounded-full border border-primary/50 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                        Popular
+            {SERVICES.map((service) => {
+              const serviceImage = getServiceImage(service.slug)
+              return (
+                <Card
+                  key={service.slug}
+                  className="group overflow-hidden border-border bg-card transition-all hover:border-primary/50 hover:shadow-lg"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
+                    <Image
+                      src={serviceImage.src || "/placeholder.svg"}
+                      alt={serviceImage.alt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                      <span className="rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground">
+                        {service.priceRange}
                       </span>
-                    )}
+                      {service.featured && (
+                        <span className="rounded-full border border-primary/50 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                          Popular
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <CardContent className="p-6">
-                  <h2 className="mb-2 text-xl font-semibold text-foreground">{service.name}</h2>
-                  <p className="mb-4 text-sm text-muted-foreground line-clamp-2">{service.description}</p>
-                  <div className="mb-4 flex items-center gap-4 text-sm text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      {service.duration}
-                    </span>
-                  </div>
-                  <Link
-                    href={`/services/${service.slug}`}
-                    className="flex items-center gap-1 font-medium text-primary hover:underline"
-                  >
-                    Learn More
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
+                  <CardContent className="p-6">
+                    <h2 className="mb-2 text-xl font-semibold text-foreground">{service.name}</h2>
+                    <p className="mb-4 text-sm text-muted-foreground line-clamp-2">{service.description}</p>
+                    <div className="mb-4 flex items-center gap-4 text-sm text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <Clock className="h-4 w-4" />
+                        {service.duration}
+                      </span>
+                    </div>
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="flex items-center gap-1 font-medium text-primary hover:underline"
+                    >
+                      Learn More
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         </div>
       </section>
