@@ -1,14 +1,13 @@
 
 
 #Ignore vscode AI rules
-.github\instructions\codacy.instructions.md
+.github/instructions/codacy.instructions.md
 
 .early.coverage
 .env.local
 node_modules
 .env
 .vscode
-ignore
 .vscodeignore
 .vscode/extensions.json
 .vscode/launch.json
