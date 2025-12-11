@@ -1,13 +1,28 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { BUSINESS_INFO, RATING_DATA } from "@/lib/constants"
 import { ConvexClientProvider } from "@/lib/convex-provider"
 
-const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" })
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(BUSINESS_INFO.website),
@@ -74,7 +89,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="light" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="geo.region" content="US-TX" />
@@ -82,7 +97,7 @@ export default function RootLayout({
         <meta name="geo.position" content={`${BUSINESS_INFO.coordinates.lat};${BUSINESS_INFO.coordinates.lng}`} />
         <meta name="ICBM" content={`${BUSINESS_INFO.coordinates.lat}, ${BUSINESS_INFO.coordinates.lng}`} />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ConvexClientProvider>{children}</ConvexClientProvider>
         <Analytics />
       </body>

@@ -42,11 +42,14 @@ interface TrustBadgesProps {
 export function TrustBadges({ variant = "default", className }: TrustBadgesProps) {
   if (variant === "compact") {
     return (
-      <div className={`flex flex-wrap items-center justify-center gap-4 text-sm ${className}`}>
+      <div className={`flex flex-wrap items-center justify-center gap-6 text-sm ${className}`}>
         {badges.slice(0, 4).map((badge) => (
-          <div key={badge.title} className="flex items-center gap-2 text-muted-foreground">
+          <div
+            key={badge.title}
+            className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+          >
             <badge.icon className="h-4 w-4 text-primary" />
-            <span>{badge.title}</span>
+            <span className="font-medium">{badge.title}</span>
           </div>
         ))}
       </div>
@@ -56,12 +59,15 @@ export function TrustBadges({ variant = "default", className }: TrustBadgesProps
   if (variant === "grid") {
     return (
       <div className={`grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 ${className}`}>
-        {badges.map((badge) => (
+        {badges.map((badge, index) => (
           <div
             key={badge.title}
-            className="flex flex-col items-center rounded-xl border border-border bg-card p-4 text-center transition-colors hover:border-primary/50"
+            className="group relative flex flex-col items-center rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 text-center transition-all duration-300 hover:border-primary/30 hover:shadow-soft hover-lift"
+            style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <badge.icon className="mb-2 h-8 w-8 text-primary" />
+            <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-transform duration-300 group-hover:scale-110">
+              <badge.icon className="h-7 w-7 text-primary" />
+            </div>
             <div className="font-semibold text-foreground">{badge.title}</div>
             <div className="text-xs text-muted-foreground">{badge.description}</div>
           </div>
@@ -71,11 +77,11 @@ export function TrustBadges({ variant = "default", className }: TrustBadgesProps
   }
 
   return (
-    <div className={`flex flex-wrap items-center justify-center gap-6 ${className}`}>
+    <div className={`flex flex-wrap items-center justify-center gap-8 ${className}`}>
       {badges.map((badge) => (
-        <div key={badge.title} className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-            <badge.icon className="h-6 w-6 text-primary" />
+        <div key={badge.title} className="flex items-center gap-4 group">
+          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-transform duration-300 group-hover:scale-110">
+            <badge.icon className="h-7 w-7 text-primary" />
           </div>
           <div>
             <div className="font-semibold text-foreground">{badge.title}</div>
