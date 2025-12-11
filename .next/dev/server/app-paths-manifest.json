@@ -1,8 +1,0 @@
-{
-  "/(marketing)/page": "app/(marketing)/page.js",
-  "/(services)/services/[slug]/page": "app/(services)/services/[slug]/page.js",
-  "/(services)/services/page": "app/(services)/services/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/email/send/route": "app/api/email/send/route.js",
-  "/api/lead/process/route": "app/api/lead/process/route.js"
-}

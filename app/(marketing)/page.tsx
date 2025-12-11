@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { LeadForm } from "@/components/lead-form"
 import { TrustBadges } from "@/components/trust-badges"
 import { BUSINESS_INFO, SERVICES, SERVICE_AREAS, RATING_DATA, CREDENTIALS } from "@/lib/constants"
+import { getServiceImage } from "@/lib/images"
 
 export const metadata: Metadata = {
   title: "Professional Auto Detailing San Antonio | One Detail At A Time",
@@ -152,44 +153,47 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuredServices.map((service) => (
-              <Card
-                key={service.slug}
-                className="group overflow-hidden border-border bg-card transition-all hover:border-primary/50 hover:shadow-lg"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
-                  <Image
-                    src={`/.jpg?height=300&width=480&query=${encodeURIComponent(service.name + " car detailing san antonio")}`}
-                    alt={`${service.name} service in San Antonio, TX`}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground">
-                      {service.priceRange}
-                    </span>
+            {featuredServices.map((service) => {
+              const serviceImage = getServiceImage(service.slug)
+              return (
+                <Card
+                  key={service.slug}
+                  className="group overflow-hidden border-border bg-card transition-all hover:border-primary/50 hover:shadow-lg"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
+                    <Image
+                      src={serviceImage.src || "/placeholder.svg"}
+                      alt={serviceImage.alt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <span className="rounded-full bg-primary px-3 py-1 text-sm font-medium text-primary-foreground">
+                        {service.priceRange}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="mb-2 text-xl font-semibold text-foreground">{service.name} San Antonio</h3>
-                  <p className="mb-4 text-muted-foreground">{service.shortDescription}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="flex items-center gap-1 text-sm text-muted-foreground">
-                      <Clock className="h-4 w-4" />
-                      {service.duration}
-                    </span>
-                    <Link
-                      href={`/services/${service.slug}`}
-                      className="flex items-center gap-1 font-medium text-primary hover:underline"
-                    >
-                      Learn More
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  <CardContent className="p-6">
+                    <h3 className="mb-2 text-xl font-semibold text-foreground">{service.name} San Antonio</h3>
+                    <p className="mb-4 text-muted-foreground">{service.shortDescription}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                        <Clock className="h-4 w-4" />
+                        {service.duration}
+                      </span>
+                      <Link
+                        href={`/services/${service.slug}`}
+                        className="flex items-center gap-1 font-medium text-primary hover:underline"
+                      >
+                        Learn More
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
 
           <div className="mt-10 text-center">

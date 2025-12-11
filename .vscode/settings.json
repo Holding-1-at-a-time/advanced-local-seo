@@ -1,4 +1,0 @@
-{
-  "sarif-viewer.connectToGithubCodeScanning": "off",
-  "codeQL.createQuery.qlPackLocation": "/workspaces/advanced-local-seo"
-}
