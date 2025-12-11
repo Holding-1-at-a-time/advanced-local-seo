@@ -1,11 +1,1 @@
-{
-  "version": 4,
-  "routes": {},
-  "dynamicRoutes": {},
-  "notFoundRoutes": [],
-  "preview": {
-    "previewModeId": "4cdd40f798bd1863e95862d937afefa6",
-    "previewModeSigningKey": "0f9a84e652e6144f04fbd2ff52192286b840fd5ced1050dc98f1884126f07ae6",
-    "previewModeEncryptionKey": "627ffde609cbceb965e981932f7bdee1b0d38186f8345507406261db8d4a3f8b"
-  }
-}
+{"version":4,"routes":{"/services/auto-detailing":{},"/services/ceramic-coating":{},"/services/paint-correction":{},"/services/interior-deep-cleansing":{},"/services/exterior-hand-wash":{},"/services/headlight-restoration":{},"/services/engine-detailing":{},"/services/wheel-tire-detailing":{},"/services/scratch-removal":{},"/services/odor-elimination":{},"/services/leather-conditioning":{},"/services/pet-hair-removal":{},"/services/water-spot-removal":{},"/services/glass-treatment":{},"/services/chrome-polishing":{}},"dynamicRoutes":{"/services/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/services/[slug]","routeRegex":"^\\/services\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"2db0dbb12dbd3ad548508022f80b35e6","previewModeSigningKey":"07a6d9e38edfd23b550a268506a1b23c28ed1244e68d95c003e433273fee5e1e","previewModeEncryptionKey":"01329c2eda3a2c0e966a2ab2890e3efad54824299b67b52f7c2a65aeb70a4696"}}
