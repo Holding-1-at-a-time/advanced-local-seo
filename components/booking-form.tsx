@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { useMutation } from "convex/react"
-import { api } from "@/convex/_generated/api.d"
+import { api } from "@/convex/_generated/api"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"

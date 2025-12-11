@@ -19,14 +19,15 @@ export const createBooking = mutation({
   },
   handler: async (ctx, args) => {
     const now = Date.now()
-    return await ctx.db.insert("bookings", {
-          ...args,
-          status: "pending",
-          depositPaid: false,
-          emailSent: false,
-          createdAt: now,
-          updatedAt: now,
-        });
+    const bookingId = await ctx.db.insert("bookings", {
+      ...args,
+      status: "pending",
+      depositPaid: false,
+      emailSent: false,
+      createdAt: now,
+      updatedAt: now,
+    })
+    return bookingId
   },
 })
 
