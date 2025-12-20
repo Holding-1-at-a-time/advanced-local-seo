@@ -1,6 +1,33 @@
 import type { MetadataRoute } from "next"
 import { SERVICES, SERVICE_AREAS, BUSINESS_INFO } from "@/lib/constants"
 
+const CLUSTER_TOPICS: Record<string, string[]> = {
+  "auto-detailing": [
+    "paint-protection",
+    "interior-vs-exterior",
+    "benefits",
+    "pricing-guide",
+    "diy-vs-professional",
+    "seasonal-care",
+  ],
+  "ceramic-coating": [
+    "what-is-ceramic-coating",
+    "ceramic-vs-wax",
+    "longevity",
+    "preparation",
+    "maintenance",
+    "cost-breakdown",
+  ],
+  "paint-correction": [
+    "swirl-marks",
+    "scratch-types",
+    "single-vs-multi-stage",
+    "oxidation-removal",
+    "before-ceramic-coating",
+    "machine-polishing",
+  ],
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = BUSINESS_INFO.website
 
@@ -22,6 +49,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }))
 
+  const clusterPages = Object.entries(CLUSTER_TOPICS).flatMap(([serviceSlug, clusters]) =>
+    clusters.map((clusterSlug) => ({
+      url: `${baseUrl}/services/${serviceSlug}/${clusterSlug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+  )
+
   // Landing pages for main services
   const landingPages = SERVICES.filter((s) => s.featured).map((service) => ({
     url: `${baseUrl}/landing/${service.slug}`,
@@ -40,5 +76,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   )
 
-  return [...staticPages, ...servicePages, ...landingPages, ...neighborhoodPages]
+  return [...staticPages, ...servicePages, ...clusterPages, ...landingPages, ...neighborhoodPages]
 }
